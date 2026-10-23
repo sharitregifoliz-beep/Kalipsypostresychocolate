@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalipsy | Repostería & Postres Artesanales Gourmet</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom Styles and Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        kalipsy: {
+                            pink: '#F8E8EE',
+                            accent: '#D80032',
+                            dark: '#2B1216',
+                            light: '#FFF5F7',
+                            softPink: '#FFB4B4',
+                            burgundy: '#800020',
+                            gold: '#E5A93C',
+                        }
+                    },
+                    fontFamily: {
+                        display: ['Fredoka', 'sans-serif'],
+                        body: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #FFF5F7;
+            color: #2B1216;
+        }
+        h1, h2, h3, h4, .font-display {
+            font-family: 'Fredoka', cursive, sans-serif;
+        }
+        .hero-pattern {
+            background-color: #FFF5F7;
+            background-image: radial-gradient(#FFB4B4 0.75px, transparent 0.75px), radial-gradient(#FFB4B4 0.75px, #FFF5F7 0.75px);
+            background-size: 30px 30px;
+            background-position: 0 0,15px 15px;
+        }
+        .product-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 25px -5px rgba(216, 0, 50, 0.1), 0 8px 10px -6px rgba(216, 0, 50, 0.05);
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FFF5F7;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #FFB4B4;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #D80032;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-kalipsy-softPink selection:text-kalipsy-dark">
+
+    <!-- Header / Navbar Sticky -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-kalipsy-pink transition-all shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Logo Kalipsy -->
+                <a href="#inicio" class="flex items-center gap-3 group">
+                    <div class="w-12 h-12 rounded-full bg-kalipsy-accent flex items-center justify-center text-white text-2xl shadow-md group-hover:scale-105 transition-transform">
+                        <i class="fa-solid fa-cookie-bite"></i>
+                    </div>
+                    <div>
+                        <span class="text-2xl font-bold font-display tracking-wide text-kalipsy-dark">Kalipsy<span class="text-kalipsy-accent">.</span></span>
+                        <p class="text-xs text-kalipsy-burgundy font-medium tracking-wider uppercase -mt-1">Repostería Gourmet</p>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Menu -->
+                <nav class="hidden md:flex items-center gap-8 font-medium text-sm">
+                    <a href="#inicio" class="hover:text-kalipsy-accent transition-colors">Inicio</a>
+                    <a href="#nosotros" class="hover:text-kalipsy-accent transition-colors">Nosotros</a>
+                    <a href="#productos" class="hover:text-kalipsy-accent transition-colors">Catálogo (100)</a>
+                    <a href="#ventajas" class="hover:text-kalipsy-accent transition-colors">¿Por qué Kalipsy?</a>
+                    <a href="#contacto" class="hover:text-kalipsy-accent transition-colors">Contacto</a>
+                </nav>
+
+                <!-- Actions / WhatsApp CTA -->
+                <div class="hidden sm:flex items-center gap-4">
+                    <a href="#contacto" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-kalipsy-accent text-white font-semibold text-sm shadow-lg shadow-kalipsy-accent/20 hover:bg-kalipsy-burgundy transition-all hover:scale-105">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                        <span>Pedir por WhatsApp</span>
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="p-2 rounded-lg text-kalipsy-dark hover:bg-kalipsy-pink focus:outline-none" aria-label="Abrir Menú">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-kalipsy-pink px-4 pt-2 pb-6 space-y-3">
+            <a href="#inicio" class="block py-2 text-kalipsy-dark hover:text-kalipsy-accent font-medium">Inicio</a>
+            <a href="#nosotros" class="block py-2 text-kalipsy-dark hover:text-kalipsy-accent font-medium">Nosotros</a>
+            <a href="#productos" class="block py-2 text-kalipsy-dark hover:text-kalipsy-accent font-medium">Catálogo de Postres</a>
+            <a href="#ventajas" class="block py-2 text-kalipsy-dark hover:text-kalipsy-accent font-medium">¿Por qué Kalipsy?</a>
+            <a href="#contacto" class="block py-2 text-kalipsy-dark hover:text-kalipsy-accent font-medium">Contacto y Pedidos</a>
+            <a href="#contacto" class="inline-flex items-center justify-center w-full gap-2 px-5 py-3 rounded-full bg-kalipsy-accent text-white font-semibold text-sm shadow-md">
+                <i class="fa-brands fa-whatsapp"></i>
+                <span>Pedir por WhatsApp</span>
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="inicio" class="hero-pattern relative overflow-hidden py-16 lg:py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    
+                    <!-- Left Hero Content -->
+                    <div class="space-y-6 text-center lg:text-left">
+                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-kalipsy-pink border border-kalipsy-softPink text-kalipsy-burgundy text-xs sm:text-sm font-semibold">
+                            <i class="fa-solid fa-heart text-kalipsy-accent"></i>
+                            <span>Repostería 100% Artesanal y Creada en Familia</span>
+                        </div>
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-kalipsy-dark leading-tight">
+                            Momentos dulces e <span class="text-kalipsy-accent underline decoration-kalipsy-softPink">inolvidables</span> para todos
+                        </h1>
+                        <p class="text-lg text-gray-700 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                            Descubre más de 100 delicias artesanales pensadas para sorprender a niños, niñas y toda la familia. Desde cheesecakes cremosos hasta cajas de regalo y tortas personalizadas.
+                        </p>
+                        
+                        <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                            <a href="#productos" class="w-full sm:w-auto px-8 py-4 rounded-full bg-kalipsy-accent text-white font-bold text-base shadow-xl shadow-kalipsy-accent/25 hover:bg-kalipsy-burgundy transition-all hover:-translate-y-0.5 text-center">
+                                Explorar Menú de Postres
+                            </a>
+                            <a href="#nosotros" class="w-full sm:w-auto px-8 py-4 rounded-full bg-white text-kalipsy-dark font-semibold text-base border border-kalipsy-pink hover:bg-kalipsy-pink transition-all text-center">
+                                Conocer Nuestra Historia
+                            </a>
+                        </div>
+
+                        <!-- Stats or Highlights -->
+                        <div class="pt-8 grid grid-cols-3 gap-4 border-t border-kalipsy-softPink/40">
+                            <div>
+                                <p class="text-2xl sm:text-3xl font-bold text-kalipsy-accent font-display">100+</p>
+                                <p class="text-xs sm:text-sm text-gray-600">Postres Diferentes</p>
+                            </div>
+                            <div>
+                                <p class="text-2xl sm:text-3xl font-bold text-kalipsy-accent font-display">100%</p>
+                                <p class="text-xs sm:text-sm text-gray-600">Artesanal & Fresco</p>
+                            </div>
+                            <div>
+                                <p class="text-2xl sm:text-3xl font-bold text-kalipsy-accent font-display">4.9★</p>
+                                <p class="text-xs sm:text-sm text-gray-600">Amado por Familias</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Visual Card Image -->
+                    <div class="relative flex justify-center">
+                        <div class="relative w-full max-w-md bg-white p-6 rounded-3xl shadow-2xl border-4 border-white rotate-1 hover:rotate-0 transition-transform duration-500">
+                            <div class="relative h-80 rounded-2xl overflow-hidden bg-kalipsy-pink flex items-center justify-center">
+                                <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80" 
+                                     alt="Postre Gourmet Kalipsy" 
+                                     class="w-full h-full object-cover"
+                                     onerror="this.src='https://placehold.co/600x600/F8E8EE/800020?text=Kalipsy+Postres+Gourmet'">
+                                <div class="absolute inset-0 bg-gradient-to-t from-kalipsy-dark/60 via-transparent to-transparent"></div>
+                                <div class="absolute bottom-4 left-4 right-4 text-white">
+                                    <span class="px-3 py-1 bg-kalipsy-accent text-xs font-bold rounded-full uppercase tracking-wider">Favorito del Mes</span>
+                                    <h3 class="text-xl font-bold mt-1">Chocolate Estilo Dubái & Cheesecakes</h3>
+                                </div>
+                            </div>
+                            
+                            <!-- Floating Badge -->
+                            <div class="absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl shadow-xl border border-kalipsy-pink flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-kalipsy-pink text-kalipsy-accent flex items-center justify-center text-xl">
+                                    <i class="fa-solid fa-cake-candles"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold text-kalipsy-dark">Eventos Infantiles</p>
+                                    <p class="text-xs text-gray-500">Combos & Bento Cakes</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Sobre Nosotros -->
+        <section id="nosotros" class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="relative order-2 lg:order-1">
+                        <div class="grid grid-cols-2 gap-4">
+                            <img src="https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=600&q=80" 
+                                 alt="Preparación artesanal" 
+                                 class="rounded-2xl shadow-md object-cover h-64 w-full"
+                                 onerror="this.src='https://placehold.co/400x500/F8E8EE/800020?text=Reposter%C3%ADa+Artesanal'">
+                            <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=600&q=80" 
+                                 alt="Postres para niños y familias" 
+                                 class="rounded-2xl shadow-md object-cover h-64 w-full mt-8"
+                                 onerror="this.src='https://placehold.co/400x500/FFB4B4/2B1216?text=Para+Toda+la+Familia'">
+                        </div>
+                    </div>
+
+                    <div class="space-y-6 order-1 lg:order-2">
+                        <span class="text-kalipsy-accent font-bold uppercase tracking-widest text-xs sm:text-sm">Sobre Kalipsy</span>
+                        <h2 class="text-3xl sm:text-4xl font-bold text-kalipsy-dark">
+                            Dulces momentos hechos con amor, tradición e innovación
+                        </h2>
+                        <p class="text-gray-600 leading-relaxed">
+                            En <strong class="text-kalipsy-dark">Kalipsy</strong>, nos dedicamos al arte de endulzar la vida de grandes y chicos. Nacimos en el sector terciario con el propósito de llevar una experiencia dulce, colorida y de la más alta calidad a cada hogar.
+                        </p>
+                        <p class="text-gray-600 leading-relaxed">
+                            Seleccionamos minuciosamente cada ingrediente —desde chocolates finos hasta frutas de temporada— para asegurar que cada bocado evoque alegría, dulzura y el calor de compartir en familia o celebrar el cumpleaños de los más pequeños.
+                        </p>
+
+                        <div class="grid sm:grid-cols-2 gap-4 pt-4">
+                            <div class="flex items-start gap-3 p-3 rounded-xl bg-kalipsy-light">
+                                <i class="fa-solid fa-child text-kalipsy-accent text-xl mt-1"></i>
+                                <div>
+                                    <h4 class="font-bold text-sm text-kalipsy-dark">Especial Niños & Niñas</h4>
+                                    <p class="text-xs text-gray-500">Sabores divertedisimos y presentaciones mágicas.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3 p-3 rounded-xl bg-kalipsy-light">
+                                <i class="fa-solid fa-award text-kalipsy-accent text-xl mt-1"></i>
+                                <div>
+                                    <h4 class="font-bold text-sm text-kalipsy-dark">Calidad Premium</h4>
+                                    <p class="text-xs text-gray-500">Recetas originales y elaboración artesanal diaria.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Catalogo Completo de Productos (100 productos con Filtros) -->
+        <section id="productos" class="py-20 bg-kalipsy-light">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <!-- Section Header -->
+                <div class="text-center max-w-3xl mx-auto space-y-4 mb-12">
+                    <span class="text-kalipsy-accent font-bold uppercase tracking-widest text-xs sm:text-sm">Nuestro Menú Variado</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-kalipsy-dark">Explora Nuestros 100 Postres KALIPSY</h2>
+                    <p class="text-gray-600">Filtra por tu categoría favorita o utiliza nuestro buscador rápido para encontrar tu antojo dulcísimo.</p>
+                    
+                    <!-- Search Bar -->
+                    <div class="relative max-w-md mx-auto pt-2">
+                        <input type="text" id="search-input" placeholder="Buscar por nombre (ej. Nutella, Fresa, Tiramisú...)" 
+                               class="w-full pl-11 pr-4 py-3 rounded-full border border-kalipsy-softPink bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-kalipsy-accent transition-all text-sm">
+                        <i class="fa-solid fa-magnifying-glass absolute left-4 top-6 text-gray-400"></i>
+                    </div>
+                </div>
+
+                <!-- Category Filter Buttons -->
+                <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-10" id="category-filters">
+                    <button class="filter-btn active px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold bg-kalipsy-accent text-white shadow-sm transition-all" data-category="todos">
+                        Todos (100)
+                    </button>
+                    <button class="filter-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold bg-white text-kalipsy-dark border border-kalipsy-pink hover:bg-kalipsy-pink transition-all" data-category="cheesecakes">
+                        Cheesecakes & Mousses
+                    </button>
+                    <button class="filter-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold bg-white text-kalipsy-dark border border-kalipsy-pink hover:bg-kalipsy-pink transition-all" data-category="brownies">
+                        Brownies & Galletas
+                    </button>
+                    <button class="filter-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold bg-white text-kalipsy-dark border border-kalipsy-pink hover:bg-kalipsy-pink transition-all" data-category="fresas">
+                        Fresas & Frutas
+                    </button>
+                    <button class="filter-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold bg-white text-kalipsy-dark border border-kalipsy-pink hover:bg-kalipsy-pink transition-all" data-category="tortas">
+                        Tortas & Bento Cakes
+                    </button>
+                    <button class="filter-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold bg-white text-kalipsy-dark border border-kalipsy-pink hover:bg-kalipsy-pink transition-all" data-category="tradicionales">
+                        Tradicionales & Especiales
+                    </button>
+                    <button class="filter-btn px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold bg-white text-kalipsy-dark border border-kalipsy-pink hover:bg-kalipsy-pink transition-all" data-category="cajas">
+                        Cajas & Regalos
+                    </button>
+                </div>
+
+                <!-- Product Grid Dynamic Container -->
+                <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <!-- JavaScript will dynamically render the 100 products here -->
+                </div>
+
+                <!-- No Results Message -->
+                <div id="no-results" class="hidden text-center py-12">
+                    <i class="fa-solid fa-cookie text-4xl text-kalipsy-softPink mb-3"></i>
+                    <p class="text-lg text-gray-600 font-medium">No encontramos postres que coincidan con tu búsqueda.</p>
+                    <p class="text-sm text-gray-400">Intenta buscar otra palabra o borra los filtros.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Ventajas Competitivas -->
+        <section id="ventajas" class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-16">
+                    <span class="text-kalipsy-accent font-bold uppercase tracking-widest text-xs sm:text-sm">Nuestra Garantía</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-kalipsy-dark">¿Por qué elegir Kalipsy?</h2>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Card 1 -->
+                    <div class="p-8 rounded-3xl bg-kalipsy-light border border-kalipsy-pink text-center space-y-4 hover:shadow-lg transition-shadow">
+                        <div class="w-16 h-16 rounded-full bg-white text-kalipsy-accent flex items-center justify-center text-2xl mx-auto shadow-sm">
+                            <i class="fa-solid fa-wheat-awn"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-kalipsy-dark">100% Artesanal</h3>
+                        <p class="text-sm text-gray-600">Elaborados diariamente sin conservantes artificiales, conservando la frescura de lo hecho en casa.</p>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="p-8 rounded-3xl bg-kalipsy-light border border-kalipsy-pink text-center space-y-4 hover:shadow-lg transition-shadow">
+                        <div class="w-16 h-16 rounded-full bg-white text-kalipsy-accent flex items-center justify-center text-2xl mx-auto shadow-sm">
+                            <i class="fa-solid fa-truck-fast"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-kalipsy-dark">Entregas Rápidas</h3>
+                        <p class="text-sm text-gray-600">Empaques especiales diseñados para conservar la temperatura y la impecable presentación del postre.</p>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="p-8 rounded-3xl bg-kalipsy-light border border-kalipsy-pink text-center space-y-4 hover:shadow-lg transition-shadow">
+                        <div class="w-16 h-16 rounded-full bg-white text-kalipsy-accent flex items-center justify-center text-2xl mx-auto shadow-sm">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-kalipsy-dark">Eventos Infantiles</h3>
+                        <p class="text-xs sm:text-sm text-gray-600">Mini postres en shot, bento cakes y cajas degustación temáticas para cumpleaños de niños y niñas.</p>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="p-8 rounded-3xl bg-kalipsy-light border border-kalipsy-pink text-center space-y-4 hover:shadow-lg transition-shadow">
+                        <div class="w-16 h-16 rounded-full bg-white text-kalipsy-accent flex items-center justify-center text-2xl mx-auto shadow-sm">
+                            <i class="fa-solid fa-gift"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-kalipsy-dark">Regalos Personalizados</h3>
+                        <p class="text-sm text-gray-600">Bouquets de fresas, cajas sorpresa y tablas dulces con tarjetas personalizadas para fechas especiales.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Formulario de Contacto / Pedidos -->
+        <section id="contacto" class="py-20 bg-kalipsy-light">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-white rounded-3xl shadow-xl border border-kalipsy-pink overflow-hidden">
+                    <div class="grid lg:grid-cols-5">
+                        
+                        <!-- Info Panel -->
+                        <div class="lg:col-span-2 bg-kalipsy-dark text-white p-8 lg:p-12 flex flex-col justify-between">
+                            <div class="space-y-6">
+                                <span class="px-3 py-1 bg-kalipsy-accent text-white text-xs font-bold rounded-full uppercase tracking-wider">Atención al Cliente</span>
+                                <h3 class="text-3xl font-bold font-display">¿Tienes un antojo o un evento especial?</h3>
+                                <p class="text-kalipsy-pink text-sm leading-relaxed">
+                                    Déjanos un mensaje o realiza una solicitud de pedido personalizado. Estaremos encantados de acompañarte en tus celebraciones.
+                                </p>
+                                
+                                <div class="space-y-4 pt-4 text-sm">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-kalipsy-softPink">
+                                            <i class="fa-solid fa-location-dot"></i>
+                                        </div>
+                                        <span>Zona Gourmet y Entregas a Domicilio</span>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-kalipsy-softPink">
+                                            <i class="fa-solid fa-clock"></i>
+                                        </div>
+                                        <span>Lunes a Domingo: 9:00 AM - 8:00 PM</span>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-kalipsy-softPink">
+                                            <i class="fa-solid fa-envelope"></i>
+                                        </div>
+                                        <span>pedidos@kalipsypostres.com</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pt-8 border-t border-white/10 mt-8">
+                                <p class="text-xs text-gray-400">Síguenos en redes para ver el detrás de cámara de nuestras preparaciones.</p>
+                            </div>
+                        </div>
+
+                        <!-- Interactive Form -->
+                        <div class="lg:col-span-3 p-8 lg:p-12">
+                            <!-- Demostrativo Alert -->
+                            <div class="mb-6 p-4 rounded-2xl bg-amber-50 border border-amber-200 flex items-start gap-3 text-amber-800 text-xs sm:text-sm">
+                                <i class="fa-solid fa-circle-info text-amber-600 mt-0.5 text-base"></i>
+                                <p><strong>Nota demostrativa:</strong> Este formulario no enviará datos a un servidor real. Al enviar, generará una simulación de mensaje de pedido rápida.</p>
+                            </div>
+
+                            <form id="contact-form" class="space-y-5">
+                                <div class="grid sm:grid-cols-2 gap-5">
+                                    <div>
+                                        <label class="block text-xs font-bold text-kalipsy-dark uppercase mb-2">Tu Nombre *</label>
+                                        <input type="text" required placeholder="Ej. Camila Pérez" 
+                                               class="w-full px-4 py-3 rounded-xl border border-kalipsy-pink bg-kalipsy-light/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-kalipsy-accent text-sm">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-bold text-kalipsy-dark uppercase mb-2">Teléfono / WhatsApp *</label>
+                                        <input type="tel" required placeholder="Ej. +57 300 123 4567" 
+                                               class="w-full px-4 py-3 rounded-xl border border-kalipsy-pink bg-kalipsy-light/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-kalipsy-accent text-sm">
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="block text-xs font-bold text-kalipsy-dark uppercase mb-2">Interés Principal</label>
+                                    <select class="w-full px-4 py-3 rounded-xl border border-kalipsy-pink bg-kalipsy-light/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-kalipsy-accent text-sm">
+                                        <option>Pedido Personal / Antojo Domicilio</option>
+                                        <option>Cumpleaños Infantil / Evento Niños</option>
+                                        <option>Caja de Regalo / Fechas Especiales</option>
+                                        <option>Cotización al Por Mayor / Eventos Empresariales</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label class="block text-xs font-bold text-kalipsy-dark uppercase mb-2">Detalle de tu Pedido o Mensaje *</label>
+                                    <textarea rows="4" required placeholder="Escribe los postres de tu interés (Ej. 2 Cheesecakes de frutos rojos, 1 Bento Cake...)" 
+                                              class="w-full px-4 py-3 rounded-xl border border-kalipsy-pink bg-kalipsy-light/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-kalipsy-accent text-sm"></textarea>
+                                </div>
+
+                                <button type="submit" class="w-full py-4 rounded-xl bg-kalipsy-accent text-white font-bold text-base shadow-lg hover:bg-kalipsy-burgundy transition-all flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-paper-plane"></i>
+                                    <span>Simular Envío de Pedido</span>
+                                </button>
+                            </form>
+
+                            <!-- Success Notification -->
+                            <div id="form-success" class="hidden mt-6 p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm text-center">
+                                <i class="fa-solid fa-circle-check text-2xl text-emerald-600 block mb-2"></i>
+                                <strong>¡Mensaje recibido con éxito!</strong>
+                                <p class="text-xs text-emerald-700 mt-1">Gracias por contactar a Kalipsy. Te contactaremos pronto.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-kalipsy-dark text-white pt-16 pb-12 border-t-4 border-kalipsy-accent">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-white/10">
+                
+                <!-- Col 1: Brand Info -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-kalipsy-accent flex items-center justify-center text-white text-xl">
+                            <i class="fa-solid fa-cookie-bite"></i>
+                        </div>
+                        <span class="text-2xl font-bold font-display tracking-wide text-white">Kalipsy.</span>
+                    </div>
+                    <p class="text-xs text-gray-300 leading-relaxed">
+                        Repostería artesanal gourmet. Creamos experiencias dulces para consentir a toda la familia, niños y niñas en sus momentos más especiales.
+                    </p>
+                    <div class="flex items-center gap-3 pt-2">
+                        <a href="#" class="w-9 h-9 rounded-full bg-white/10 hover:bg-kalipsy-accent flex items-center justify-center text-white transition-colors" aria-label="Instagram">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-white/10 hover:bg-kalipsy-accent flex items-center justify-center text-white transition-colors" aria-label="Facebook">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-white/10 hover:bg-kalipsy-accent flex items-center justify-center text-white transition-colors" aria-label="TikTok">
+                            <i class="fa-brands fa-tiktok"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Col 2: Navigation Links -->
+                <div>
+                    <h4 class="text-sm font-bold uppercase tracking-wider text-kalipsy-softPink mb-4 font-display">Navegación</h4>
+                    <ul class="space-y-2 text-xs text-gray-300">
+                        <li><a href="#inicio" class="hover:text-white transition-colors">Inicio</a></li>
+                        <li><a href="#nosotros" class="hover:text-white transition-colors">Sobre Nosotros</a></li>
+                        <li><a href="#productos" class="hover:text-white transition-colors">Catálogo de 100 Postres</a></li>
+                        <li><a href="#ventajas" class="hover:text-white transition-colors">Ventajas Competitivas</a></li>
+                        <li><a href="#contacto" class="hover:text-white transition-colors">Pedidos & Contacto</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Product Categories -->
+                <div>
+                    <h4 class="text-sm font-bold uppercase tracking-wider text-kalipsy-softPink mb-4 font-display">Categorías</h4>
+                    <ul class="space-y-2 text-xs text-gray-300">
+                        <li><span>Cheesecakes & Mousses</span></li>
+                        <li><span>Brownies & Galletas Rellenas</span></li>
+                        <li><span>Fresas con Crema & Chocolate</span></li>
+                        <li><span>Tortas & Bento Cakes Infantiles</span></li>
+                        <li><span>Cajas Degustación & Regalos</span></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Business Info -->
+                <div>
+                    <h4 class="text-sm font-bold uppercase tracking-wider text-kalipsy-softPink mb-4 font-display">Información</h4>
+                    <p class="text-xs text-gray-300 mb-2"><strong>Actividad Económica:</strong> Sector Terciario - Servicios Dulces & Repostería</p>
+                    <p class="text-xs text-gray-300 mb-2"><strong>Público Objetivo:</strong> Familias, Niños y Niñas</p>
+                    <p class="text-xs text-gray-300"><strong>Cobertura:</strong> Entregas a domicilio locales y atención de eventos infantiles.</p>
+                </div>
+
+            </div>
+
+            <!-- Bottom Copyright -->
+            <div class="pt-8 text-center text-xs text-gray-400">
+                <p>&copy; <span id="current-year"></span> Kalipsy - Todos los derechos reservados. Página empresarial demostrativa.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Data and Interactive Functionality -->
+    <script>
+        // Set year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // 100 KALIPSY PRODUCTS DATA ARRAY
+        const rawProducts = [
+            { id: 1, name: "Cheesecake en vaso", category: "cheesecakes", icon: "fa-wine-glass" },
+            { id: 2, name: "Cheesecake de frutos rojos", category: "cheesecakes", icon: "fa-cake-candles" },
+            { id: 3, name: "Cheesecake de maracuyá", category: "cheesecakes", icon: "fa-lemon" },
+            { id: 4, name: "Cheesecake de Oreo", category: "cheesecakes", icon: "fa-cookie" },
+            { id: 5, name: "Brownies tradicionales", category: "brownies", icon: "fa-square" },
+            { id: 6, name: "Brownies rellenos", category: "brownies", icon: "fa-box-open" },
+            { id: 7, name: "Brownies de Nutella", category: "brownies", icon: "fa-jar" },
+            { id: 8, name: "Brownies de pistacho", category: "brownies", icon: "fa-seedling" },
+            { id: 9, name: "Fresas con crema", category: "fresas", icon: "fa-bowl-rice" },
+            { id: 10, name: "Fresas con chocolate", category: "fresas", icon: "fa-heart" },
+            { id: 11, name: "Fresas con crema de Oreo", category: "fresas", icon: "fa-cookie-bite" },
+            { id: 12, name: "Tres leches tradicional", category: "tradicionales", icon: "fa-whiskey-glass" },
+            { id: 13, name: "Tres leches de chocolate", category: "tradicionales", icon: "fa-cubes-stacked" },
+            { id: 14, name: "Tres leches de arequipe", category: "tradicionales", icon: "fa-spoon" },
+            { id: 15, name: "Tres leches de café", category: "tradicionales", icon: "fa-mug-hot" },
+            { id: 16, name: "Tiramisú", category: "tradicionales", icon: "fa-layer-group" },
+            { id: 17, name: "Mousse de chocolate", category: "cheesecakes", icon: "fa-cloud" },
+            { id: 18, name: "Mousse de maracuyá", category: "cheesecakes", icon: "fa-cloud-sun" },
+            { id: 19, name: "Mousse de mango", category: "cheesecakes", icon: "fa-sun" },
+            { id: 20, name: "Mousse de fresa", category: "cheesecakes", icon: "fa-heart" },
+            { id: 21, name: "Arroz con leche", category: "tradicionales", icon: "fa-bowl-food" },
+            { id: 22, name: "Arroz con leche y arequipe", category: "tradicionales", icon: "fa-spoon" },
+            { id: 23, name: "Flan de caramelo", category: "tradicionales", icon: "fa-custard" },
+            { id: 24, name: "Flan de coco", category: "tradicionales", icon: "fa-circle" },
+            { id: 25, name: "Postre de limón", category: "tradicionales", icon: "fa-citrus" },
+            { id: 26, name: "Postre de maracuyá", category: "tradicionales", icon: "fa-lemon" },
+            { id: 27, name: "Postre de natas", category: "tradicionales", icon: "fa-mug-saucer" },
+            { id: 28, name: "Postre de Milo", category: "tradicionales", icon: "fa-mug-hot" },
+            { id: 29, name: "Postre de Oreo", category: "tradicionales", icon: "fa-cookie" },
+            { id: 30, name: "Postre de galleta María", category: "tradicionales", icon: "fa-cookie-bite" },
+            { id: 31, name: "Torta de chocolate", category: "tortas", icon: "fa-cake-candles" },
+            { id: 32, name: "Torta red velvet", category: "tortas", icon: "fa-heart" },
+            { id: 33, name: "Torta de zanahoria", category: "tortas", icon: "fa-carrot" },
+            { id: 34, name: "Torta de vainilla", category: "tortas", icon: "fa-stroopwafel" },
+            { id: 35, name: "Torta de amapola", category: "tortas", icon: "fa-seedling" },
+            { id: 36, name: "Mini tortas personalizadas", category: "tortas", icon: "fa-birthday-cake" },
+            { id: 37, name: "Bento cakes", category: "tortas", icon: "fa-box" },
+            { id: 38, name: "Tortas vintage", category: "tortas", icon: "fa-crown" },
+            { id: 39, name: "Cupcakes decorados", category: "tortas", icon: "fa-cake-slice" },
+            { id: 40, name: "Cupcakes rellenos", category: "tortas", icon: "fa-fill" },
+            { id: 41, name: "Galletas rellenas", category: "brownies", icon: "fa-cookie" },
+            { id: 42, name: "Galletas con chispas de chocolate", category: "brownies", icon: "fa-cookie-bite" },
+            { id: 43, name: "Galletas de red velvet", category: "brownies", icon: "fa-heart" },
+            { id: 44, name: "Galletas de pistacho", category: "brownies", icon: "fa-seedling" },
+            { id: 45, name: "Cookies gigantes", category: "brownies", icon: "fa-circle font-bold" },
+            { id: 46, name: "Alfajores", category: "tradicionales", icon: "fa-circle-notch" },
+            { id: 47, name: "Macarons", category: "tradicionales", icon: "fa-coins" },
+            { id: 48, name: "Trufas de chocolate", category: "brownies", icon: "fa-circle" },
+            { id: 49, name: "Bombones rellenos", category: "brownies", icon: "fa-gem" },
+            { id: 50, name: "Chocolates artesanales", category: "brownies", icon: "fa-cubes" },
+            { id: 51, name: "Chocolate estilo Dubái", category: "brownies", icon: "fa-star" },
+            { id: 52, name: "Volcán de chocolate", category: "brownies", icon: "fa-volcano" },
+            { id: 53, name: "Lava cake", category: "brownies", icon: "fa-fire" },
+            { id: 54, name: "Churros rellenos", category: "brownies", icon: "fa-lines-leaning" },
+            { id: 55, name: "Mini donas", category: "brownies", icon: "fa-circle-dot" },
+            { id: 56, name: "Donas rellenas", category: "brownies", icon: "fa-compact-disc" },
+            { id: 57, name: "Waffles dulces", category: "brownies", icon: "fa-border-all" },
+            { id: 58, name: "Mini pancakes", category: "brownies", icon: "fa-layer-group" },
+            { id: 59, name: "Crepes dulces", category: "brownies", icon: "fa-scroll" },
+            { id: 60, name: "Crepes rellenos de Nutella", category: "brownies", icon: "fa-fill-drip" },
+            { id: 61, name: "Sushi dulce", category: "tradicionales", icon: "fa-fish" },
+            { id: 62, name: "Tartaletas de frutas", category: "fresas", icon: "fa-apple-whole" },
+            { id: 63, name: "Tartaletas de limón", category: "tradicionales", icon: "fa-lemon" },
+            { id: 64, name: "Pavlova de frutas", category: "fresas", icon: "fa-feather" },
+            { id: 65, name: "Milhojas", category: "tradicionales", icon: "fa-bars" },
+            { id: 66, name: "Profiteroles", category: "tradicionales", icon: "fa-cloud" },
+            { id: 67, name: "Éclairs rellenos", category: "tradicionales", icon: "fa-capsules" },
+            { id: 68, name: "Cannolis dulces", category: "tradicionales", icon: "fa-scroll" },
+            { id: 69, name: "Croissants rellenos de chocolate", category: "brownies", icon: "fa-moon" },
+            { id: 70, name: "Croissants de pistacho", category: "brownies", icon: "fa-leaf" },
+            { id: 71, name: "Rollos de canela", category: "tradicionales", icon: "fa-arrows-spin" },
+            { id: 72, name: "Pan de banano", category: "tortas", icon: "fa-bread-slice" },
+            { id: 73, name: "Pudín de pan", category: "tradicionales", icon: "fa-square-poll-horizontal" },
+            { id: 74, name: "Natilla tradicional", category: "tradicionales", icon: "fa-bowl-rice" },
+            { id: 75, name: "Natilla de chocolate", category: "tradicionales", icon: "fa-mug-hot" },
+            { id: 76, name: "Buñuelos dulces", category: "tradicionales", icon: "fa-circle text-amber-500" },
+            { id: 77, name: "Merengones de frutas", category: "fresas", icon: "fa-cloud" },
+            { id: 78, name: "Ensalada de frutas especial", category: "fresas", icon: "fa-bowl-food" },
+            { id: 79, name: "Copa de frutas con crema", category: "fresas", icon: "fa-wine-glass" },
+            { id: 80, name: "Mango con crema", category: "fresas", icon: "fa-sun" },
+            { id: 81, name: "Mango con chocolate", category: "fresas", icon: "fa-cubes" },
+            { id: 82, name: "Gelatina mosaico", category: "tradicionales", icon: "fa-cubes" },
+            { id: 83, name: "Gelatina de leche", category: "tradicionales", icon: "fa-glass-water" },
+            { id: 84, name: "Gelatina de frutas", category: "fresas", icon: "fa-apple-whole" },
+            { id: 85, name: "Cheesecake japonés", category: "cheesecakes", icon: "fa-award" },
+            { id: 86, name: "Mochis dulces", category: "tradicionales", icon: "fa-circle-dot" },
+            { id: 87, name: "Bombas de chocolate caliente", category: "brownies", icon: "fa-bomb" },
+            { id: 88, name: "Postres en shot", category: "cajas", icon: "fa-glass-water" },
+            { id: 89, name: "Mini postres para eventos", category: "cajas", icon: "fa-champagne-glasses" },
+            { id: 90, name: "Caja degustación de postres", category: "cajas", icon: "fa-box-open" },
+            { id: 91, name: "Caja de brownies surtidos", category: "cajas", icon: "fa-boxes-packing" },
+            { id: 92, name: "Caja de galletas gourmet", category: "cajas", icon: "fa-cookie" },
+            { id: 93, name: "Caja de fresas achocolatadas", category: "cajas", icon: "fa-gift" },
+            { id: 94, name: "Caja de chocolates personalizados", category: "cajas", icon: "fa-heart" },
+            { id: 95, name: "Tabla de dulces y chocolates", category: "cajas", icon: "fa-table-cells" },
+            { id: 96, name: "Bouquet de fresas con chocolate", category: "cajas", icon: "fa-spa" },
+            { id: 97, name: "Caja de regalo dulce", category: "cajas", icon: "fa-gift" },
+            { id: 98, name: "Postres personalizados para cumpleaños", category: "tortas", icon: "fa-cake-candles" },
+            { id: 99, name: "Postres para fechas especiales", category: "cajas", icon: "fa-calendar-heart" },
+            { id: 100, name: "Combos de postres y bebidas", category: "cajas", icon: "fa-utensils" }
+        ];
+
+        const productsGrid = document.getElementById('products-grid');
+        const searchInput = document.getElementById('search-input');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const noResults = document.getElementById('no-results');
+
+        let currentCategory = 'todos';
+        let searchQuery = '';
+
+        function renderProducts() {
+            productsGrid.innerHTML = '';
+            
+            const filtered = rawProducts.filter(p => {
+                const matchesCategory = currentCategory === 'todos' || p.category === currentCategory;
+                const matchesSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase());
+                return matchesCategory && matchesSearch;
+            });
+
+            if (filtered.length === 0) {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+                
+                filtered.forEach(product => {
+                    const card = document.createElement('div');
+                    card.className = 'product-card bg-white rounded-2xl p-5 border border-kalipsy-pink/80 flex flex-col justify-between relative group';
+                    
+                    card.innerHTML = `
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-kalipsy-pink/70 text-kalipsy-accent flex items-center justify-center text-xl mb-4 group-hover:bg-kalipsy-accent group-hover:text-white transition-colors">
+                                <i class="fa-solid ${product.icon || 'fa-cookie'}"></i>
+                            </div>
+                            <span class="text-[10px] font-bold tracking-wider text-kalipsy-burgundy uppercase bg-kalipsy-pink/40 px-2 py-0.5 rounded-md">#${product.id} KALIPSY</span>
+                            <h3 class="font-bold text-kalipsy-dark text-base mt-1 line-clamp-2">${product.name}</h3>
+                            <p class="text-xs text-gray-500 mt-2 leading-relaxed">Deliciosa preparación artesanal elaborada con ingredientes gourmet frescos.</p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-kalipsy-pink/40 flex items-center justify-between">
+                            <span class="text-xs font-bold text-kalipsy-accent">Especialidad</span>
+                            <a href="#contacto" onclick="selectProductForForm('${product.name}')" class="text-xs font-semibold px-3 py-1.5 rounded-full bg-kalipsy-light text-kalipsy-dark hover:bg-kalipsy-accent hover:text-white transition-all">
+                                Pedir <i class="fa-solid fa-chevron-right text-[10px] ml-1"></i>
+                            </a>
+                        </div>
+                    `;
+                    productsGrid.appendChild(card);
+                });
+            }
+        }
+
+        // Auto-fill form message when clicking "Pedir"
+        window.selectProductForForm = function(productName) {
+            const textarea = document.querySelector('#contact-form textarea');
+            if (textarea) {
+                textarea.value = `Hola Kalipsy, me gustaría solicitar información o realizar un pedido de: "${productName}".`;
+            }
+        };
+
+        // Filter event listeners
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => {
+                    b.classList.remove('active', 'bg-kalipsy-accent', 'text-white');
+                    b.classList.add('bg-white', 'text-kalipsy-dark');
+                });
+                btn.classList.add('active', 'bg-kalipsy-accent', 'text-white');
+                btn.classList.remove('bg-white', 'text-kalipsy-dark');
+                
+                currentCategory = btn.getAttribute('data-category');
+                renderProducts();
+            });
+        });
+
+        // Search event listener
+        searchInput.addEventListener('input', (e) => {
+            searchQuery = e.target.value;
+            renderProducts();
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Contact Form Demo Submission Handling
+        const contactForm = document.getElementById('contact-form');
+        const formSuccess = document.getElementById('form-success');
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            formSuccess.classList.remove('hidden');
+            contactForm.reset();
+            setTimeout(() => {
+                formSuccess.classList.add('hidden');
+            }, 6000);
+        });
+
+        // Initial rendering of products on load
+        renderProducts();
+    </script>
+</body>
+</html>
